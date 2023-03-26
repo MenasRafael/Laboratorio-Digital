@@ -1,0 +1,25 @@
+Quartus Prime Archive log --	C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/projeto_genius.qarlog
+
+Archive:	C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/projeto_genius.qar
+Date:		Tue Mar 21 10:53:43 2023
+Quartus Prime		20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+	=========== Files Selected: ===========
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/comparador_85.vhd
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/contador_163.vhd
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/contador_m.vhd
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/edge_detector.vhd
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/fluxo_dados.vhd
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/hexa7seg.vhd
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/projeto_genius.qpf
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/projeto_genius.qsf
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/projeto_genius.vhd
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/ram_16x6.vhd
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/ram_conteudo_jogadas.mif
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/registrador_n.vhd
+C:/intelFPGA_lite/Projetos/Projetasso/Semana02/testes/testes3/unidade_controle.vhd
+c:/intelfpga_lite/20.1/quartus/bin64/assignment_defaults.qdf
+	======= Total: 14 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
