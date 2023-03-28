@@ -12,9 +12,14 @@ ENTITY projeto_genius IS
         modo2e3 : IN STD_LOGIC;
         botoes : IN STD_LOGIC_VECTOR (5 DOWNTO 0);
         leds : OUT STD_LOGIC_VECTOR (5 DOWNTO 0);
+        botoes_p2 : IN STD_LOGIC_VECTOR (5 DOWNTO 0);
+        leds_p2 : OUT STD_LOGIC_VECTOR (5 DOWNTO 0);
         pronto : OUT STD_LOGIC;
         ganhou : OUT STD_LOGIC;
         perdeu : OUT STD_LOGIC;
+        pronto_p2 : OUT STD_LOGIC;
+        ganhou_p2 : OUT STD_LOGIC;
+        perdeu_p2 : OUT STD_LOGIC;
         db_rodada : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
         db_contagem : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
         db_memoria : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
@@ -23,7 +28,6 @@ ENTITY projeto_genius IS
         db_botoesIgualMemoria : OUT STD_LOGIC;
         db_clock : OUT STD_LOGIC;
         db_enderecoIgualRodada : OUT STD_LOGIC;
-        db_tem_jogada : OUT STD_LOGIC;
         db_timeout : OUT STD_LOGIC;
         db_fim_mostra_jogada : OUT STD_LOGIC;
         db_escreveM : OUT STD_LOGIC
@@ -67,9 +71,77 @@ ARCHITECTURE estrutural OF projeto_genius IS
     SIGNAL s_modo2e3 : STD_LOGIC;
     SIGNAL s_modo1 : STD_LOGIC;
 
-    SIGNAL s_modo : STD_LOGIC;
+    SIGNAL s_modo : STD_LOGIC_VECTOR(1 DOWNTO 0);
+    SIGNAL s_enableControlaSelecionaTimeout : STD_LOGIC;
 
-    s_enableControlaSelecionaTimeout : STD_LOGIC;
+    SIGNAL s_fimCRodada_p2 : STD_LOGIC;
+    SIGNAL s_fimCEndereco_p2 : STD_LOGIC;
+    SIGNAL s_enderecoIgualRodada_p2 : STD_LOGIC;
+    SIGNAL s_botoesIgualMemoria_p2 : STD_LOGIC;
+
+    SIGNAL s_jogada_correta_p2 : STD_LOGIC;
+    SIGNAL s_registraR_p2 : STD_LOGIC;
+    SIGNAL s_contaCEndereco_p2 : STD_LOGIC;
+    SIGNAL s_contaCRodada_p2 : STD_LOGIC;
+
+    SIGNAL s_db_estado_p2 : STD_LOGIC_VECTOR (3 DOWNTO 0);
+    SIGNAL s_zeraCEndereco_p2 : STD_LOGIC;
+    SIGNAL s_zeraCRodada_p2 : STD_LOGIC;
+    SIGNAL s_zeraR_p2 : STD_LOGIC;
+
+    SIGNAL s_jogada_feita_p2 : STD_LOGIC;
+    SIGNAL s_tem_jogada_p2 : STD_LOGIC;
+    SIGNAL s_db_jogada_p2 : STD_LOGIC_VECTOR (5 DOWNTO 0);
+    SIGNAL s_conta_timeout_p2 : STD_LOGIC;
+
+    SIGNAL s_fim_timeout_p2 : STD_LOGIC;
+    SIGNAL s_reset_timeout_p2 : STD_LOGIC;
+    SIGNAL s_fim_mostra_jogada_p2 : STD_LOGIC;
+    SIGNAL s_reset_mostra_jogada_p2 : STD_LOGIC;
+
+    SIGNAL s_conta_mostra_jogada_p2 : STD_LOGIC;
+    SIGNAL s_escreveM_p2 : STD_LOGIC;
+
+    SIGNAL s_db_botoes_p2 : STD_LOGIC_VECTOR (5 DOWNTO 0);
+    SIGNAL s_db_contagem_p2 : STD_LOGIC_VECTOR (3 DOWNTO 0);
+    SIGNAL s_db_memoria_p2 : STD_LOGIC_VECTOR (5 DOWNTO 0);
+    SIGNAL s_db_rodada_p2 : STD_LOGIC_VECTOR (3 DOWNTO 0);
+
+    SIGNAL s_enableControlaSelecionaTimeout_p2 : STD_LOGIC;
+
+    SIGNAL s_dig1_pontuacao_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig2_pontuacao_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig3_pontuacao_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+
+    SIGNAL s_dig1_pontuacao_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig2_pontuacao_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig3_pontuacao_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+
+    SIGNAL s_dig1_tempo_total_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig2_tempo_total_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig3_tempo_total_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+
+    SIGNAL s_dig1_tempo_total_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig2_tempo_total_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig3_tempo_total_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+
+    SIGNAL s_pontuacao_p1 : STD_LOGIC;
+    SIGNAL s_pontuacao_p2 : STD_LOGIC;
+    SIGNAL s_pontuacao_igual : STD_LOGIC;
+    SIGNAL s_pontuacao_maior : STD_LOGIC;
+    SIGNAL s_pontuacao_menor : STD_LOGIC;
+
+    SIGNAL s_tempo_total_p1 : STD_LOGIC;
+    SIGNAL s_tempo_total_p2 : STD_LOGIC;
+    SIGNAL s_tempo_total_igual : STD_LOGIC;
+    SIGNAL s_tempo_total_maior : STD_LOGIC;
+    SIGNAL s_tempo_total_menor : STD_LOGIC;
+
+    SIGNAL pronto_final : STD_LOGIC;
+    SIGNAL conta_ate_mil_p1 : STD_LOGIC;
+    SIGNAL conta_ate_mil_p2 : STD_LOGIC;
+
+    SIGNAL iniciar_2 : STD_LOGIC;
 
     COMPONENT unidade_controle IS
         PORT (
@@ -81,7 +153,7 @@ ARCHITECTURE estrutural OF projeto_genius IS
             ultimaRodada : IN STD_LOGIC;
             jogada : IN STD_LOGIC; --joga_feita
             fim_timeout : IN STD_LOGIC;
-            fim_mostra_primeira_jogada : IN STD_LOGIC;
+            fim_mostra_jogada : IN STD_LOGIC;
             modo : IN STD_LOGIC_VECTOR(1 DOWNTO 0); --dois bits concatenados dos sinais de modo
             zeraCEndereco : OUT STD_LOGIC;
             zeraCRodada : OUT STD_LOGIC;
@@ -98,7 +170,7 @@ ARCHITECTURE estrutural OF projeto_genius IS
             enableMostraJogada : OUT STD_LOGIC;
             zeraMostraJogada : OUT STD_LOGIC;
             escreveM : OUT STD_LOGIC;
-            enableControleSelecionaTimeout : OUT STD_LOGIC;
+            enableControlaSelecionaTimeout : OUT STD_LOGIC
         );
     END COMPONENT;
 
@@ -137,6 +209,29 @@ ARCHITECTURE estrutural OF projeto_genius IS
         );
     END COMPONENT;
 
+    COMPONENT bcd_counter IS
+        PORT (
+            clk : IN STD_LOGIC;
+            reset : IN STD_LOGIC;
+            enable : IN STD_LOGIC;
+            finish : OUT STD_LOGIC;
+            digit3 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+            digit2 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+            digit1 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+        );
+    END COMPONENT;
+
+    COMPONENT comparador IS
+        PORT (
+            a : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+            b : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+            enable : IN STD_LOGIC;
+            equal : OUT STD_LOGIC;
+            greater : OUT STD_LOGIC;
+            less : OUT STD_LOGIC
+        );
+    END COMPONENT;
+
     COMPONENT hexa7seg IS
         PORT (
             hexa : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -145,7 +240,7 @@ ARCHITECTURE estrutural OF projeto_genius IS
     END COMPONENT;
 BEGIN
 
-    UC : unidade_controle
+    UCp1 : unidade_controle
     PORT MAP(
         clock => clock,
         reset => reset,
@@ -175,7 +270,7 @@ BEGIN
         enableControlaSelecionaTimeout => s_enableControlaSelecionaTimeout
     );
 
-    FD : fluxo_dados
+    FDp1 : fluxo_dados
     PORT MAP(
         clock => clock,
         zeraCEndereco => s_zeraCEndereco,
@@ -198,7 +293,6 @@ BEGIN
         fimCEndereco => s_fimCEndereco,
         fimCRodada => s_fimCRodada,
         jogada_feita => s_jogada_feita,
-        db_tem_jogada => s_tem_jogada,
         db_jogada_correta => s_jogada_correta,
         db_rodada => s_db_rodada,
         db_contagem => s_db_contagem,
@@ -207,6 +301,157 @@ BEGIN
         fim_timeout => s_fim_timeout,
         fim_mostra_jogada => s_fim_mostra_jogada,
         leds => leds
+    );
+
+    UCp2 : unidade_controle
+    PORT MAP(
+        clock => clock,
+        reset => reset,
+        iniciar => iniciar_2,
+        igualChaveMemoria => s_botoesIgualMemoria_p2,
+        igualRodadaEndereco => s_enderecoIgualRodada_p2,
+        ultimaRodada => s_fimCRodada_p2,
+        jogada => s_jogada_feita_p2,
+        fim_timeout => s_fim_timeout_p2,
+        fim_mostra_jogada => s_fim_mostra_jogada_p2,
+        modo => s_modo,
+        zeraCEndereco => s_zeraCEndereco_p2,
+        zeraCRodada => s_zeraCRodada_p2,
+        contaCEndereco => s_contaCEndereco_p2,
+        contaCRodada => s_contaCRodada_p2,
+        zeraR => s_zeraR_p2,
+        registraR => s_registraR_p2,
+        acertou => ganhou_p2,
+        errou => perdeu_p2,
+        pronto => pronto_p2,
+        db_estado => s_db_estado_p2,
+        conta_timeout => s_conta_timeout_p2,
+        reset_timeout => s_reset_timeout_p2,
+        enableMostraJogada => s_conta_mostra_jogada_p2,
+        zeraMostraJogada => s_reset_mostra_jogada_p2,
+        escreveM => s_escreveM_p2,
+        enableControlaSelecionaTimeout => s_enableControlaSelecionaTimeout_p2
+    );
+
+    FDp2 : fluxo_dados
+    PORT MAP(
+        clock => clock,
+        zeraCEndereco => s_zeraCEndereco_p2,
+        zeraCRodada => s_zeraCRodada_p2,
+        contaCEndereco => s_contaCEndereco_p2,
+        contaCRodada => s_contaCRodada_p2,
+        enableTimeout => s_conta_timeout_p2,
+        enableMostraJogada => s_conta_mostra_jogada_p2,
+        escreveM => s_escreveM_p2,
+        zeraR => s_zeraR_p2,
+        zeraTimeout => s_reset_timeout_p2,
+        zeraMostraJogada => s_reset_mostra_jogada_p2,
+        registraR => s_registraR_p2,
+        enableControleSelecionaTimeout => s_enableControlaSelecionaTimeout_p2,
+        modo1 => s_modo1,
+        modo2e3 => s_modo2e3,
+        botoes => botoes_p2,
+        igualEnderecoJogada => s_botoesIgualMemoria_p2,
+        igualEnderecoRodada => s_enderecoIgualRodada_p2,
+        fimCEndereco => s_fimCEndereco_p2,
+        fimCRodada => s_fimCRodada_p2,
+        jogada_feita => s_jogada_feita_p2,
+        db_jogada_correta => s_jogada_correta_p2,
+        db_rodada => s_db_rodada_p2,
+        db_contagem => s_db_contagem_p2,
+        db_memoria => s_db_memoria_p2,
+        db_jogada => s_db_jogada_p2,
+        fim_timeout => s_fim_timeout_p2,
+        fim_mostra_jogada => s_fim_mostra_jogada_p2,
+        leds => leds_p2
+    );
+
+    pontuacao_p1 : bcd_counter
+    PORT MAP(
+        clk => clock,
+        reset => reset,
+        enable => s_contaCEndereco,
+        finish => OPEN,
+        digit3 => s_dig3_pontuacao_p1,
+        digit2 => s_dig2_pontuacao_p1,
+        digit1 => s_dig1_pontuacao_p1
+    );
+
+    pontuacao_p2 : bcd_counter
+    PORT MAP(
+        clk => clock,
+        reset => reset,
+        enable => s_contaCEndereco_p2,
+        finish => OPEN,
+        digit3 => s_dig3_pontuacao_p2,
+        digit2 => s_dig2_pontuacao_p2,
+        digit1 => s_dig1_pontuacao_p2
+    );
+
+    contador_controle_seleciona_tempo_p1 : contador_m
+    GENERIC MAP(1000)
+    PORT MAP(
+        clock => clock,
+        zera_as => s_zeraCRodada,
+        zera_s => '0',
+        conta => s_conta_timeout,
+        Q => OPEN,
+        fim => conta_ate_mil_p1,
+        meio => OPEN
+    );
+
+    contador_controle_seleciona_tempo_p2 : contador_m
+    GENERIC MAP(1000)
+    PORT MAP(
+        clock => clock,
+        zera_as => s_zeraCRodada_p2,
+        zera_s => '0',
+        conta => s_conta_timeout,
+        Q => OPEN,
+        fim => conta_ate_mil_p2,
+        meio => OPEN
+    );
+
+    tempo_total_p1 : bcd_counter
+    PORT MAP(
+        clk => clock,
+        reset => reset,
+        enable => conta_ate_mil_p1,
+        finish => OPEN,
+        digit3 => s_dig3_tempo_total_p1,
+        digit2 => s_dig2_tempo_total_p1,
+        digit1 => s_dig1_tempo_total_p1
+    );
+
+    tempo_total_p2 : bcd_counter
+    PORT MAP(
+        clk => clock,
+        reset => reset,
+        enable => conta_ate_mil_p2,
+        finish => OPEN,
+        digit3 => s_dig3_tempo_total_p2,
+        digit2 => s_dig2_tempo_total_p2,
+        digit1 => s_dig1_tempo_total_p2
+    );
+
+    compara_pontuacoes : comparador
+    PORT (
+        a => s_pontuacao_p1,
+        b => s_pontuacao_p2,
+        enable => pronto_final,
+        equal => s_pontuacao_igual,
+        greater => s_pontuacao_maior,
+        less => s_pontuacao_menor
+    );
+
+    compara_tempos : comparador
+    PORT (
+        a => s_tempo_total_p1,
+        b => s_tempo_total_p2,
+        enable => s_pontuacao_igual,
+        equal => s_tempo_total_igual,
+        greater => s_tempo_total_maior,
+        less => s_tempo_total_menor
     );
 
     HEX0 : hexa7seg
@@ -239,7 +484,19 @@ BEGIN
         sseg => db_rodada
     );
 
+    pronto_final <= pronto AND pronto_p2;
+
+    s_modo1 <= modo1;
+    s_modo2e3 <= modo2e3;
     s_modo <= (modo2e3 & modo1);
+
+    with s_modo select iniciar_2 <= iniciar when "11", '0' when others; 
+
+    s_pontuacao_p1 <= s_dig3_pontuacao_p1 & s_dig2_pontuacao_p1 & s_dig1_pontuacao_p1;
+    s_pontuacao_p2 <= s_dig3_pontuacao_p2 & s_dig2_pontuacao_p2 & s_dig1_pontuacao_p2;
+
+    s_tempo_total_p1 <= s_dig3_tempo_total_p1 & s_dig2_tempo_total_p1 & s_dig1_tempo_total_p1;
+    s_tempo_total_p1 <= s_dig3_tempo_total_p2 & s_dig2_tempo_total_p2 & s_dig1_tempo_total_p2;
 
     db_clock <= clock;
     db_botoesIgualMemoria <= s_botoesIgualMemoria;

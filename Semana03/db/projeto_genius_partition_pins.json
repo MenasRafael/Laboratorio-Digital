@@ -1,0 +1,641 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "leds[0]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[1]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[2]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[3]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[4]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[5]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "leds_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "pronto_p1",
+					"strict" : false
+				},
+				{
+					"name" : "ganhou_p1",
+					"strict" : false
+				},
+				{
+					"name" : "perdeu_p1",
+					"strict" : false
+				},
+				{
+					"name" : "pronto_p2",
+					"strict" : false
+				},
+				{
+					"name" : "ganhou_p2",
+					"strict" : false
+				},
+				{
+					"name" : "perdeu_p2",
+					"strict" : false
+				},
+				{
+					"name" : "fim_de_jogo",
+					"strict" : false
+				},
+				{
+					"name" : "ganhador[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ganhador[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ganhador[2]",
+					"strict" : false
+				},
+				{
+					"name" : "ganhador[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_rodada_p2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_estado_p2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_botoesIgualMemoria",
+					"strict" : false
+				},
+				{
+					"name" : "db_clock",
+					"strict" : false
+				},
+				{
+					"name" : "db_enderecoIgualRodada",
+					"strict" : false
+				},
+				{
+					"name" : "db_timeout",
+					"strict" : false
+				},
+				{
+					"name" : "db_fim_mostra_jogada",
+					"strict" : false
+				},
+				{
+					"name" : "db_escreveM",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_pontuacao_p2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_pontuacao_p2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_pontuacao_p2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig1_tempo_total_p2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig2_tempo_total_p2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "db_dig3_tempo_total_p2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes[0]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes[1]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes[2]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes[3]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes[4]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes[5]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "botoes_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "clock",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "iniciar",
+					"strict" : false
+				},
+				{
+					"name" : "modo1",
+					"strict" : false
+				},
+				{
+					"name" : "modo2e3",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

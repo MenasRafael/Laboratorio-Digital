@@ -14,23 +14,39 @@ ENTITY projeto_genius IS
         leds : OUT STD_LOGIC_VECTOR (5 DOWNTO 0);
         botoes_p2 : IN STD_LOGIC_VECTOR (5 DOWNTO 0);
         leds_p2 : OUT STD_LOGIC_VECTOR (5 DOWNTO 0);
-        pronto : OUT STD_LOGIC;
-        ganhou : OUT STD_LOGIC;
-        perdeu : OUT STD_LOGIC;
+        pronto_p1 : OUT STD_LOGIC;
+        ganhou_p1 : OUT STD_LOGIC;
+        perdeu_p1 : OUT STD_LOGIC;
         pronto_p2 : OUT STD_LOGIC;
         ganhou_p2 : OUT STD_LOGIC;
         perdeu_p2 : OUT STD_LOGIC;
+        fim_de_jogo : OUT STD_LOGIC; --qdo os dois jogadores terminarem 
+        ganhador : OUT STD_LOGIC_VECTOR (3 DOWNTO 0); --display p mostrar quem ganhou (apagado nos modos 1 e 2)
         db_rodada : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
+        db_rodada_p2 : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
         db_contagem : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
         db_memoria : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
         db_jogadafeita : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
         db_estado : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
+        db_estado_p2 : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
         db_botoesIgualMemoria : OUT STD_LOGIC;
         db_clock : OUT STD_LOGIC;
         db_enderecoIgualRodada : OUT STD_LOGIC;
         db_timeout : OUT STD_LOGIC;
         db_fim_mostra_jogada : OUT STD_LOGIC;
-        db_escreveM : OUT STD_LOGIC
+        db_escreveM : OUT STD_LOGIC;
+        db_dig1_pontuacao_p1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig2_pontuacao_p1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig3_pontuacao_p1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig1_pontuacao_p2 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig2_pontuacao_p2 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig3_pontuacao_p2 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig1_tempo_total_p1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig2_tempo_total_p1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig3_tempo_total_p1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig1_tempo_total_p2 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig2_tempo_total_p2 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
+        db_dig3_tempo_total_p2 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
     );
 END ENTITY;
 
@@ -71,7 +87,7 @@ ARCHITECTURE estrutural OF projeto_genius IS
     SIGNAL s_modo2e3 : STD_LOGIC;
     SIGNAL s_modo1 : STD_LOGIC;
 
-    SIGNAL s_modo : STD_LOGIC_VECTOR(1 downto 0);
+    SIGNAL s_modo : STD_LOGIC_VECTOR(1 DOWNTO 0);
     SIGNAL s_enableControlaSelecionaTimeout : STD_LOGIC;
 
     SIGNAL s_fimCRodada_p2 : STD_LOGIC;
@@ -108,26 +124,63 @@ ARCHITECTURE estrutural OF projeto_genius IS
     SIGNAL s_db_rodada_p2 : STD_LOGIC_VECTOR (3 DOWNTO 0);
 
     SIGNAL s_enableControlaSelecionaTimeout_p2 : STD_LOGIC;
-    
-    SIGNAL s_dig1_pontuacao_p1: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    SIGNAL s_dig2_pontuacao_p1: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    SIGNAL s_dig3_pontuacao_p1: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    
-    SIGNAL s_dig1_pontuacao_p2: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    SIGNAL s_dig2_pontuacao_p2: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    SIGNAL s_dig3_pontuacao_p2: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    
-    SIGNAL s_dig1_tempo_total_p1: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    SIGNAL s_dig2_tempo_total_p1: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    SIGNAL s_dig3_tempo_total_p1: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    
-    SIGNAL s_dig1_tempo_total_p2: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    SIGNAL s_dig2_tempo_total_p2: STD_LOGIC_VECTOR(3 DOWNTO 0);
-    SIGNAL s_dig3_tempo_total_p2: STD_LOGIC_VECTOR(3 DOWNTO 0);
 
-    SIGNAL pronto_final: std_logic;
+    SIGNAL s_dig1_pontuacao_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig2_pontuacao_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig3_pontuacao_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    -- SIGNAL db_dig1_pontuacao_p1 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+    -- SIGNAL db_dig2_pontuacao_p1 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+    -- SIGNAL db_dig3_pontuacao_p1 : STD_LOGIC_VECTOR(6 DOWNTO 0);
 
+    SIGNAL s_dig1_pontuacao_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig2_pontuacao_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig3_pontuacao_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    -- SIGNAL db_dig1_pontuacao_p2 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+    -- SIGNAL db_dig2_pontuacao_p2 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+    -- SIGNAL db_dig3_pontuacao_p2 : STD_LOGIC_VECTOR(6 DOWNTO 0);
 
+    SIGNAL s_dig1_tempo_total_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig2_tempo_total_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig3_tempo_total_p1 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    -- SIGNAL db_dig1_tempo_total_p1 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+    -- SIGNAL db_dig2_tempo_total_p1 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+    -- SIGNAL db_dig3_tempo_total_p1 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+
+    SIGNAL s_dig1_tempo_total_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig2_tempo_total_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    SIGNAL s_dig3_tempo_total_p2 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+    -- SIGNAL db_dig1_tempo_total_p2 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+    -- SIGNAL db_dig2_tempo_total_p2 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+    -- SIGNAL db_dig3_tempo_total_p2 : STD_LOGIC_VECTOR(6 DOWNTO 0);
+
+    SIGNAL s_pontuacao_p1 : STD_LOGIC_VECTOR(11 DOWNTO 0);
+    SIGNAL s_pontuacao_p2 : STD_LOGIC_VECTOR(11 DOWNTO 0);
+    SIGNAL s_pontuacao_igual : STD_LOGIC;
+    SIGNAL s_pontuacao_maior : STD_LOGIC;
+    SIGNAL s_pontuacao_menor : STD_LOGIC;
+
+    SIGNAL s_tempo_total_p1 : STD_LOGIC_VECTOR(11 DOWNTO 0);
+    SIGNAL s_tempo_total_p2 : STD_LOGIC_VECTOR(11 DOWNTO 0);
+    SIGNAL s_tempo_total_igual : STD_LOGIC;
+    SIGNAL s_tempo_total_maior : STD_LOGIC;
+    SIGNAL s_tempo_total_menor : STD_LOGIC;
+
+    SIGNAL pronto_final : STD_LOGIC;
+
+    SIGNAL s_pronto_p1 : STD_LOGIC;
+    SIGNAL s_ganhou_p1 : STD_LOGIC;
+    SIGNAL s_perdeu_p1 : STD_LOGIC;
+
+    SIGNAL s_pronto_p2 : STD_LOGIC;
+    SIGNAL s_ganhou_p2 : STD_LOGIC;
+    SIGNAL s_perdeu_p2 : STD_LOGIC;
+
+    SIGNAL conta_ate_mil_p1 : STD_LOGIC;
+    SIGNAL conta_ate_mil_p2 : STD_LOGIC;
+
+    SIGNAL iniciar_2 : STD_LOGIC;
+    SIGNAL modo3 : STD_LOGIC;
+    signal s_vencedor : STD_LOGIC_VECTOR(3 DOWNTO 0);
 
     COMPONENT unidade_controle IS
         PORT (
@@ -195,28 +248,28 @@ ARCHITECTURE estrutural OF projeto_genius IS
         );
     END COMPONENT;
 
-    component bcd_counter is
-        port (
-          clk     : in  std_logic;
-          reset   : in  std_logic;
-          enable  : in  std_logic;
-          finish  : out std_logic;
-          digit3  : out std_logic_vector(3 downto 0);
-          digit2  : out std_logic_vector(3 downto 0);
-          digit1  : out std_logic_vector(3 downto 0)
+    COMPONENT bcd_counter IS
+        PORT (
+            clk : IN STD_LOGIC;
+            reset : IN STD_LOGIC;
+            enable : IN STD_LOGIC;
+            finish : OUT STD_LOGIC;
+            digit3 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+            digit2 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+            digit1 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
         );
-    end component;
+    END COMPONENT;
 
-    component comparador is
-        port (
-          a     : in  std_logic_vector(11 downto 0);
-          b     : in  std_logic_vector(11 downto 0);
-          enable : in  std_logic;
-          equal : out std_logic;
-          greater : out std_logic;
-          less : out std_logic
+    COMPONENT comparador IS
+        PORT (
+            a : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+            b : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+            enable : IN STD_LOGIC;
+            equal : OUT STD_LOGIC;
+            greater : OUT STD_LOGIC;
+            less : OUT STD_LOGIC
         );
-    end component;      
+    END COMPONENT;
 
     COMPONENT hexa7seg IS
         PORT (
@@ -224,6 +277,36 @@ ARCHITECTURE estrutural OF projeto_genius IS
             sseg : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
         );
     END COMPONENT;
+
+    COMPONENT contador_m IS
+        GENERIC (
+            CONSTANT M : INTEGER := 3000 -- modulo do contador
+        );
+        PORT (
+            clock : IN STD_LOGIC;
+            zera_as : IN STD_LOGIC;
+            zera_s : IN STD_LOGIC;
+            conta : IN STD_LOGIC;
+            Q : OUT STD_LOGIC_VECTOR(NATURAL(ceil(log2(real(M)))) - 1 DOWNTO 0);
+            fim : OUT STD_LOGIC;
+            meio : OUT STD_LOGIC
+        );
+    END COMPONENT;
+
+    COMPONENT indica_vencedor IS
+        PORT (
+            clock : IN STD_LOGIC;
+            enable : IN STD_LOGIC;
+            pa_maior_pb : IN STD_LOGIC;
+            pb_maior_pa : IN STD_LOGIC;
+            pa_igual_pb : IN STD_LOGIC;
+            ta_maior_tb : IN STD_LOGIC;
+            tb_maior_ta : IN STD_LOGIC;
+            ta_igual_tb : IN STD_LOGIC;
+            vencedor : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+        );
+    END COMPONENT;
+
 BEGIN
 
     UCp1 : unidade_controle
@@ -244,9 +327,9 @@ BEGIN
         contaCRodada => s_contaCRodada,
         zeraR => s_zeraR,
         registraR => s_registraR,
-        acertou => ganhou,
-        errou => perdeu,
-        pronto => pronto,
+        acertou => s_ganhou_p1,
+        errou => s_perdeu_p1,
+        pronto => s_pronto_p1,
         db_estado => s_db_estado,
         conta_timeout => s_conta_timeout,
         reset_timeout => s_reset_timeout,
@@ -293,7 +376,7 @@ BEGIN
     PORT MAP(
         clock => clock,
         reset => reset,
-        iniciar => iniciar,
+        iniciar => iniciar_2,
         igualChaveMemoria => s_botoesIgualMemoria_p2,
         igualRodadaEndereco => s_enderecoIgualRodada_p2,
         ultimaRodada => s_fimCRodada_p2,
@@ -307,9 +390,9 @@ BEGIN
         contaCRodada => s_contaCRodada_p2,
         zeraR => s_zeraR_p2,
         registraR => s_registraR_p2,
-        acertou => ganhou_p2,
-        errou => perdeu_p2,
-        pronto => pronto_p2,
+        acertou => s_ganhou_p2,
+        errou => s_perdeu_p2,
+        pronto => s_pronto_p2,
         db_estado => s_db_estado_p2,
         conta_timeout => s_conta_timeout_p2,
         reset_timeout => s_reset_timeout_p2,
@@ -352,117 +435,234 @@ BEGIN
         leds => leds_p2
     );
 
-    pontuacao_p1 : bcd_counter is
-        port map(
-          clk    => clock,
-          reset  => reset,
-          enable => s_contaCEndereco,
-          finish  => OPEN,
-          digit3  => s_dig3_pontuacao_p1,
-          digit2  => s_dig2_pontuacao_p1,
-          digit1  => s_dig1_pontuacao_p1
+    pontuacao_p1 : bcd_counter
+    PORT MAP(
+        clk => clock,
+        reset => reset,
+        enable => s_contaCEndereco,
+        finish => OPEN,
+        digit3 => s_dig3_pontuacao_p1,
+        digit2 => s_dig2_pontuacao_p1,
+        digit1 => s_dig1_pontuacao_p1
     );
 
-    pontuacao_p2 : bcd_counter is
-        port map(
-          clk    => clock,
-          reset  => reset,
-          enable => s_contaCEndereco_p2,
-          finish  => OPEN,
-          digit3  => s_dig3_pontuacao_p2,
-          digit2  => s_dig2_pontuacao_p2,
-          digit1  => s_dig1_pontuacao_p2
+    pontuacao_p2 : bcd_counter
+    PORT MAP(
+        clk => clock,
+        reset => reset,
+        enable => s_contaCEndereco_p2,
+        finish => OPEN,
+        digit3 => s_dig3_pontuacao_p2,
+        digit2 => s_dig2_pontuacao_p2,
+        digit1 => s_dig1_pontuacao_p2
     );
 
-    tempo_total_p1 : bcd_counter is
-        port map(
-          clk    => clock,
-          reset  => reset,
-          enable => s_conta_timeout,
-          finish  => OPEN,
-          digit3  => s_dig3_tempo_total_p1,
-          digit2  => s_dig2_tempo_total_p1,
-          digit1  => s_dig1_tempo_total_p1
+    contador_controle_seleciona_tempo_p1 : contador_m
+    GENERIC MAP(1000)
+    PORT MAP(
+        clock => clock,
+        zera_as => s_zeraCRodada,
+        zera_s => '0',
+        conta => s_conta_timeout,
+        Q => OPEN,
+        fim => conta_ate_mil_p1,
+        meio => OPEN
     );
 
-    tempo_total_p2 : bcd_counter is
-        port map(
-          clk    => clock,
-          reset  => reset,
-          enable => s_conta_timeout_p2,
-          finish  => OPEN,
-          digit3  => s_dig3_tempo_total_p2,
-          digit2  => s_dig2_tempo_total_p2,
-          digit1  => s_dig1_tempo_total_p2
+    contador_controle_seleciona_tempo_p2 : contador_m
+    GENERIC MAP(1000)
+    PORT MAP(
+        clock => clock,
+        zera_as => s_zeraCRodada_p2,
+        zera_s => '0',
+        conta => s_conta_timeout,
+        Q => OPEN,
+        fim => conta_ate_mil_p2,
+        meio => OPEN
     );
 
-    compara_pontuacoes : comparador is
-        port (
-          a => s_pontuacao_p1,
-          b => s_pontuacao_p2,
-          enable => pronto_final,
-          equal => s_pontuacao_igual,
-          greater => s_pontuacao_maior,
-          less => s_pontuacao_menor 
+    tempo_total_p1 : bcd_counter
+    PORT MAP(
+        clk => clock,
+        reset => reset,
+        enable => conta_ate_mil_p1,
+        finish => OPEN,
+        digit3 => s_dig3_tempo_total_p1,
+        digit2 => s_dig2_tempo_total_p1,
+        digit1 => s_dig1_tempo_total_p1
     );
-    
-    compara_tempos : comparador is
-        port (
-          a => s_tempo_total_p1,
-          b => s_tempo_total_p1,
-          enable => pronto_final,
-          equal => s_tempo_total_igual,
-          greater => s_tempo_total_maior,
-          less => s_tempo_total_menor
-    );  
-    
+
+    tempo_total_p2 : bcd_counter
+    PORT MAP(
+        clk => clock,
+        reset => reset,
+        enable => conta_ate_mil_p2,
+        finish => OPEN,
+        digit3 => s_dig3_tempo_total_p2,
+        digit2 => s_dig2_tempo_total_p2,
+        digit1 => s_dig1_tempo_total_p2
+    );
+
+    compara_pontuacoes : comparador
+    PORT MAP(
+        a => s_pontuacao_p1,
+        b => s_pontuacao_p2,
+        enable => pronto_final,
+        equal => s_pontuacao_igual,
+        greater => s_pontuacao_maior,
+        less => s_pontuacao_menor
+    );
+
+    compara_tempos : comparador
+    PORT MAP(
+        a => s_tempo_total_p1,
+        b => s_tempo_total_p2,
+        enable => s_pontuacao_igual,
+        equal => s_tempo_total_igual,
+        greater => s_tempo_total_maior,
+        less => s_tempo_total_menor
+    );
+
+    escolhe_vencedor : indica_vencedor
+    PORT MAP(
+        clock => clock,
+        enable => pronto_final,
+        pa_maior_pb => s_pontuacao_maior,
+        pb_maior_pa => s_pontuacao_menor,
+        pa_igual_pb => s_pontuacao_igual,
+        ta_maior_tb => s_tempo_total_maior,
+        tb_maior_ta => s_tempo_total_menor,
+        ta_igual_tb => s_tempo_total_igual,
+        vencedor => s_vencedor
+    );
+
     HEX0 : hexa7seg
-    PORT MAP(
-        hexa => s_db_contagem,
-        sseg => db_contagem
-    );
-
-    HEX1 : hexa7seg
-    PORT MAP(
-        hexa => s_db_memoria(3 DOWNTO 0),
-        sseg => db_memoria
-    );
-
-    HEX2 : hexa7seg
-    PORT MAP(
-        hexa => s_db_jogada(3 DOWNTO 0),
-        sseg => db_jogadafeita
-    );
-
-    HEX3 : hexa7seg
     PORT MAP(
         hexa => s_db_estado,
         sseg => db_estado
     );
 
-    HEX4 : hexa7seg
+    HEX1 : hexa7seg
     PORT MAP(
         hexa => s_db_rodada,
         sseg => db_rodada
     );
 
-    pronto_final <= pronto OR pronto_p2
+    HEX2 : hexa7seg
+    PORT MAP(
+        hexa => s_db_estado_p2,
+        sseg => db_estado_p2
+    );
+
+    HEX3 : hexa7seg
+    PORT MAP(
+        hexa => s_db_rodada_p2,
+        sseg => db_rodada_p2
+    );
+
+    HEX4 : hexa7seg
+    PORT MAP(
+        hexa => s_dig1_pontuacao_p1,
+        sseg => db_dig1_pontuacao_p1
+    );
+
+    HEX5 : hexa7seg
+    PORT MAP(
+        hexa => s_dig2_pontuacao_p1,
+        sseg => db_dig2_pontuacao_p1
+    );
+
+    HEX6 : hexa7seg
+    PORT MAP(
+        hexa => s_dig3_pontuacao_p1,
+        sseg => db_dig3_pontuacao_p1
+    );
+
+    HEX7 : hexa7seg
+    PORT MAP(
+        hexa => s_dig1_pontuacao_p2,
+        sseg => db_dig1_pontuacao_p2
+    );
+
+    HEX8 : hexa7seg
+    PORT MAP(
+        hexa => s_dig2_pontuacao_p2,
+        sseg => db_dig2_pontuacao_p2
+    );
+
+    HEX9 : hexa7seg
+    PORT MAP(
+        hexa => s_dig3_pontuacao_p2,
+        sseg => db_dig3_pontuacao_p2
+    );
+
+    HEX10 : hexa7seg
+    PORT MAP(
+        hexa => s_dig1_tempo_total_p1,
+        sseg => db_dig1_tempo_total_p1
+    );
+
+    HEX11 : hexa7seg
+    PORT MAP(
+        hexa => s_dig2_tempo_total_p1,
+        sseg => db_dig2_tempo_total_p1
+    );
+
+    HEX12 : hexa7seg
+    PORT MAP(
+        hexa => s_dig3_tempo_total_p1,
+        sseg => db_dig3_tempo_total_p1
+    );
+
+    HEX13 : hexa7seg
+    PORT MAP(
+        hexa => s_dig1_tempo_total_p2,
+        sseg => db_dig1_tempo_total_p2
+    );
+
+    HEX14 : hexa7seg
+    PORT MAP(
+        hexa => s_dig2_tempo_total_p2,
+        sseg => db_dig2_tempo_total_p2
+    );
+
+    HEX15 : hexa7seg
+    PORT MAP(
+        hexa => s_dig3_tempo_total_p2,
+        sseg => db_dig3_tempo_total_p2
+    );
+
+    pronto_final <= s_pronto_p1 AND s_pronto_p2;
+
+    modo3 <= modo1 AND modo2e3;
 
     s_modo1 <= modo1;
     s_modo2e3 <= modo2e3;
     s_modo <= (modo2e3 & modo1);
 
-    s_pontuacao_p1 <= s_dig3_pontuacao_p1&s_dig2_pontuacao_p1&s_dig1_pontuacao_p1;
-    s_pontuacao_p2 <= s_dig3_pontuacao_p2&s_dig2_pontuacao_p2&s_dig1_pontuacao_p2;
+    WITH s_modo SELECT iniciar_2 <= iniciar WHEN "11", '0' WHEN OTHERS;
 
-    s_tempo_total_p1 <= s_dig3_tempo_total_p1&s_dig2_tempo_total_p1&s_dig1_tempo_total_p1;
-    s_tempo_total_p1 <= s_dig3_tempo_total_p2&s_dig2_tempo_total_p2&s_dig1_tempo_total_p2;
+    s_pontuacao_p1 <= s_dig3_pontuacao_p1 & s_dig2_pontuacao_p1 & s_dig1_pontuacao_p1;
+    s_pontuacao_p2 <= s_dig3_pontuacao_p2 & s_dig2_pontuacao_p2 & s_dig1_pontuacao_p2;
 
+    s_tempo_total_p1 <= s_dig3_tempo_total_p1 & s_dig2_tempo_total_p1 & s_dig1_tempo_total_p1;
+    s_tempo_total_p2 <= s_dig3_tempo_total_p2 & s_dig2_tempo_total_p2 & s_dig1_tempo_total_p2;
+
+    ganhou_p1 <= s_ganhou_p1;
+    ganhou_p2 <= s_ganhou_p2;
+    perdeu_p1 <= s_perdeu_p1;
+    perdeu_p2 <= s_perdeu_p2;
+    pronto_p1 <= s_pronto_p1;
+    pronto_p2 <= s_pronto_p2;
+
+    fim_de_jogo <= pronto_final;
     db_clock <= clock;
     db_botoesIgualMemoria <= s_botoesIgualMemoria;
     db_enderecoIgualRodada <= s_enderecoIgualRodada;
     db_timeout <= s_fim_timeout;
     db_fim_mostra_jogada <= s_fim_mostra_jogada;
     db_escreveM <= s_escreveM;
+
+    ganhador <= s_vencedor;
 
 END estrutural;

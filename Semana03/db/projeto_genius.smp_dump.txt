@@ -1,0 +1,42 @@
+
+State Machine - |projeto_genius|unidade_controle:UCp2|Eatual
+Name Eatual.correto Eatual.escreve_rodada Eatual.proxima_rodada Eatual.adiciona_jogada Eatual.incrementa_rodada Eatual.mostra_proxima_jogada Eatual.marca_endereco_seguinte Eatual.final_da_rodada Eatual.errado Eatual.proximo Eatual.comparacao Eatual.registra Eatual.time_out Eatual.esperando Eatual.inicia_rodada Eatual.mostra_primeira_jogada Eatual.preparacao Eatual.inicial 
+Eatual.inicial 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+Eatual.preparacao 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+Eatual.mostra_primeira_jogada 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+Eatual.inicia_rodada 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+Eatual.esperando 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+Eatual.time_out 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+Eatual.registra 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+Eatual.comparacao 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+Eatual.proximo 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+Eatual.errado 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+Eatual.final_da_rodada 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+Eatual.marca_endereco_seguinte 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.mostra_proxima_jogada 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.incrementa_rodada 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.adiciona_jogada 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.proxima_rodada 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.escreve_rodada 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.correto 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |projeto_genius|unidade_controle:UCp1|Eatual
+Name Eatual.correto Eatual.escreve_rodada Eatual.proxima_rodada Eatual.adiciona_jogada Eatual.incrementa_rodada Eatual.mostra_proxima_jogada Eatual.marca_endereco_seguinte Eatual.final_da_rodada Eatual.errado Eatual.proximo Eatual.comparacao Eatual.registra Eatual.time_out Eatual.esperando Eatual.inicia_rodada Eatual.mostra_primeira_jogada Eatual.preparacao Eatual.inicial 
+Eatual.inicial 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+Eatual.preparacao 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+Eatual.mostra_primeira_jogada 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+Eatual.inicia_rodada 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+Eatual.esperando 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+Eatual.time_out 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+Eatual.registra 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+Eatual.comparacao 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+Eatual.proximo 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+Eatual.errado 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+Eatual.final_da_rodada 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+Eatual.marca_endereco_seguinte 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.mostra_proxima_jogada 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.incrementa_rodada 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.adiciona_jogada 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.proxima_rodada 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.escreve_rodada 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+Eatual.correto 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 

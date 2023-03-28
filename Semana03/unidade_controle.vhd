@@ -67,7 +67,7 @@ BEGIN
 
         esperando WHEN Eatual = proximo ELSE --passa para esperando
         final_da_rodada WHEN Eatual = comparacao AND igualChaveMemoria = '1' AND igualRodadaEndereco = '1' ELSE --passa para final_da_rodada
-        marca_endereco_seguinte WHEN Eatual = final_da_rodada AND modo = "10" AND ultimaRodada = '0' ELSE --passa para marca_endereco_seguinte
+        marca_endereco_seguinte WHEN Eatual = final_da_rodada AND (modo = "10" or modo = "11") AND ultimaRodada = '0' ELSE --passa para marca_endereco_seguinte
         mostra_proxima_jogada WHEN Eatual = marca_endereco_seguinte ELSE --passa para mostra_proxima_jogada
 
         mostra_proxima_jogada WHEN Eatual = mostra_proxima_jogada AND fim_mostra_jogada = '0' ELSE --loop do mostra_proxima_jogada

@@ -1,40 +1,40 @@
-library ieee;
-use ieee.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 
-entity comparador is
-  port (
-    a     : in  std_logic_vector(11 downto 0);
-    b     : in  std_logic_vector(11 downto 0);
-    enable : in  std_logic;
-    equal : out std_logic;
-    greater : out std_logic;
-    less : out std_logic
+ENTITY comparador IS
+  PORT (
+    a : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+    b : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
+    enable : IN STD_LOGIC;
+    equal : OUT STD_LOGIC;
+    greater : OUT STD_LOGIC;
+    less : OUT STD_LOGIC
   );
-end entity;
+END ENTITY;
 
-architecture behavioral of comparador is
-begin
+ARCHITECTURE behavioral OF comparador IS
+BEGIN
 
-  process (a, b, enable)
-  begin
-    if (enable = '1') then
-        if (a = b) then
+  PROCESS (a, b, enable)
+  BEGIN
+    IF (enable = '1') THEN
+      IF (a = b) THEN
         equal <= '1';
         greater <= '0';
         less <= '0';
-        elsif (a > b) then
+      ELSIF (a > b) THEN
         equal <= '0';
         greater <= '1';
         less <= '0';
-        else
+      ELSE
         equal <= '0';
         greater <= '0';
         less <= '1';
-        end if;
-    else
-        equal <= '0';
-        greater <= '0';
-        less <= '0';
-    end if;
-  end process;
-end architecture;
+      END IF;
+    ELSE
+      equal <= '0';
+      greater <= '0';
+      less <= '0';
+    END IF;
+  END PROCESS;
+END ARCHITECTURE;
